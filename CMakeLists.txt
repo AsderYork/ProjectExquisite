@@ -1,12 +1,20 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.12)
 project(ProjectExquisite VERSION 0.1.0)
+set(BUILD_TESTS OFF)
+set(BUILD_STATIC_LIB ON)
 
 include(CTest)
 enable_testing()
 
+add_executable(ProjectExquisite src/main.cpp src/ClientUser/ClientUser.cpp)
 
-file(GLOB ProjectExquisiteSrc "src/*.h" "src/*.cpp")
-add_executable(ProjectExquisite ${ProjectExquisiteSrc})
+message("This will be compiled")
+message("${ProjectExquisiteSrc}")
+
+
+add_subdirectory("ext/ppconsul")
+
+target_link_libraries(ProjectExquisite ppconsul)
 
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})

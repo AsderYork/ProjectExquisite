@@ -1,0 +1,6 @@
+[submodule "ext/-f"]
+	path = ext/-f
+	url = https://github.com/oliora/ppconsul.git
+[submodule "ext/ppconsul"]
+	path = ext/ppconsul
+	url = https://github.com/oliora/ppconsul.git
