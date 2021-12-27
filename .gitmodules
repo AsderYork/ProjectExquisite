@@ -1,3 +1,6 @@
 [submodule "ext/ppconsul"]
 	path = ext/ppconsul
 	url = https://github.com/oliora/ppconsul.git
+[submodule "ext/mysql-connector-cpp"]
+	path = ext/mysql-connector-cpp
+	url = https://github.com/mysql/mysql-connector-cpp.git
