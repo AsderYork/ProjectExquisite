@@ -1,6 +1,3 @@
 [submodule "ext/ppconsul"]
 	path = ext/ppconsul
 	url = https://github.com/oliora/ppconsul.git
-[submodule "ext/soci/soci"]
-	path = ext/soci/soci
-	url = https://github.com/SOCI/soci.git

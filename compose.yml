@@ -2,7 +2,6 @@
 version: '3.1'
 
 services:
-
   db:
     image: mysql:8
     command: --default-authentication-plugin=mysql_native_password
@@ -14,8 +13,3 @@ services:
       MYSQL_PASSWORD: ultrapass
     ports:
       - 3306:3306
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080

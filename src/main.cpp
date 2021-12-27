@@ -1,6 +1,8 @@
 #include <iostream>
 #include "ClientUser/ClientUser.h"
 #include "ppconsul/agent.h"
+#include "soci/soci.h"
+#include "soci/mysql/soci-mysql.h"
 
 using ppconsul::Consul;
 using namespace ppconsul::agent;
@@ -19,6 +21,9 @@ ClientUser createUserFromConsoleInput() {
 
 
 int main(int, char**) {
+
+    soci::session soci::sql(mysql, "db=db user=user password='mysql_native_password'");
+
 
     auto user = ClientUser("aabbccrerasd"); //createUserFromConsoleInput();
     std::cout << user.getUsername() << std::endl;
