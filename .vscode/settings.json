@@ -73,7 +73,11 @@
         "xlocmes": "cpp",
         "xlocmon": "cpp",
         "xloctime": "cpp",
-        "xtree": "cpp"
+        "xtree": "cpp",
+        "bitset": "cpp",
+        "forward_list": "cpp",
+        "xthread": "cpp",
+        "xmemory0": "cpp"
     },
     "sqltools.connections": [
         {
