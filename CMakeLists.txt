@@ -32,7 +32,7 @@ conan_cmake_run(CONANFILE ext/ppconsul/conanfile.txt BASIC_SETUP KEEP_PATHS)
 conan_cmake_run(CONANFILE conanfile.txt BASIC_SETUP BUILD_TYPE "Release")
 
 
-add_executable(ProjectExquisite src/main.cpp src/ClientUser/ClientUser.cpp)
+add_executable(ProjectExquisite src/main.cpp src/ClientUser/ClientUser.cpp src/Dataserver/Dataserver.cpp)
 target_link_libraries(ProjectExquisite ${CONAN_LIBS})
 
 link_directories(${FULL_PATH_TO_MYSQL_CONNECTOR_CPP_DIR}/lib)

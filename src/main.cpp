@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include "ClientUser/ClientUser.h"
+#include "Dataserver/Dataserver.h"
 #include "ppconsul/agent.h"
 
 
@@ -23,58 +24,18 @@ ClientUser createUserFromConsoleInput() {
     return currentUser;
 }
 
+int main(int, char**) {
 
-Table enshureTableExists(Session& sess, std::string tableName, std::string tableScript) {
-	auto table = sess.getSchema("db").getTable(tableName);
-	if (!table.existsInDatabase()) {
-		sess.sql(tableScript).execute();
-		std::cout << "Table " << tableName << "didn't exist before. Creating" << std::endl;
-		table = sess.getSchema("db").getTable(tableName);
-	}
-	return table;
-}
-
-void addUserRecord(Session& sess, std::string username, std::string servername, std::string usermessage) {
-
-	auto query = sess.sql("INSERT INTO userrecords(username, servername, usermessage) VALUES(?, ?, ?)");
-	query.bind(username, servername, usermessage);
-	query.execute();
-
-}
-
-void loginToDBAndRetrieveRecords(std::string username, std::string servername, std::string usermessage) {
 	try {
-		Session sess("mysqlx://user:ultrapass@127.0.0.1:33060/db?ssl-mode=disabled");
-
-		auto table = enshureTableExists(sess, "userrecords", "create table userrecords (id int NOT NULL AUTO_INCREMENT, username TEXT, usermessage TEXT, servername TEXT, date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP, primary key (id))");
-		
-		addUserRecord(sess, username, servername, usermessage);
-
-		auto query = sess.sql("select id, username, servername, usermessage, date_created from userrecords where username != ?");
-		query.bind(username);
-		auto queryResult = query.execute();
-		auto recordCount = queryResult.count();
-
-		for (auto queryResult : queryResult)
-		{
-			auto colCount = queryResult.colCount();
-			auto id = (int)queryResult.get(0);
-			auto newUsername = (std::string)queryResult.get(1);
-			auto newUervername = (std::string)queryResult.get(2);
-			auto newUsermessage = (std::string)queryResult.get(3);
-		}
-
+		Dataserver dataserver("mysqlx://user:ultrapass@127.0.0.1:33060/db?ssl-mode=disabled");
+		dataserver.addUserRecord("user4", "server9", "random message");
+		auto records = dataserver.getRecords("user3");
 	}
 	catch (const std::exception & exc)
 	{
 		std::cout << "Can't execute db part: "<< exc.what() << std::endl;
 	}
-}
 
-
-int main(int, char**) {
-
-	loginToDBAndRetrieveRecords("user3", "server1", "message3");
 
     
 
